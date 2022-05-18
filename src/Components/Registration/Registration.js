@@ -5,8 +5,8 @@ import {
   useUpdateProfile
 } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import Loading from "../../components/Loading";
+import { toast } from "react-hot-toast";
+import Loading from "../Loading/Loading";
 import auth from "../../firebase.init";
 
 
