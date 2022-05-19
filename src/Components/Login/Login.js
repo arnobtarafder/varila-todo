@@ -61,7 +61,7 @@ const Login = () => {
               <label className="label">
                 <p>
                   New to Todo App?{" "}
-                  <Link to="/signup" className="text-error">
+                  <Link to="/registration" className="text-error">
                     Signup
                   </Link>
                 </p>
