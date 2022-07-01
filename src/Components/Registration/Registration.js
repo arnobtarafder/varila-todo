@@ -85,15 +85,15 @@ const Registration = () => {
               <p className="text-red-500">{userError?.message}</p>
             </div>
             <div className="form-control mt-2">
-              <button className="btn btn-success text-white">Sign Up</button>
+              <button className="btn btn-primary text-white">Sign Up</button>
             </div>
             <div className="divider">OR</div>
             <div className="form-control mt-2">
               <button
                 onClick={() => signInWithGoogle()}
-                className="btn btn-outline btn-success hover:text-white"
+                className="btn btn-outline btn-primary hover:text-white"
               >
-                Signup with Google
+                Sign up with Google
               </button>
               <p className="text-red-500">{gError?.message}</p>
             </div>

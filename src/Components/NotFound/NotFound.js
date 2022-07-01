@@ -13,7 +13,7 @@ const NotFound = () => {
   // }
 
   return (
-    <div className='NotFound-Body container-fluid h-100 w-100 py-5'>
+    <div className='NotFound-Body h-screen mx-w-100 overflow-x-hidden container py-5 bg-base-200 mx-auto'>
 
       <div id="background"></div>
       <div className="NotFound-Top">
@@ -42,7 +42,7 @@ const NotFound = () => {
         <div className="NotFound-Buttons">
           <button className="NotFound-Button" onClick={() => navigate(-1)}>Back</button>
         
-          <button onClick={() => navigate("/home")} className='NotFound-Button'>home <i className="far fa-hand-point-right"></i></button>
+          <button onClick={() => navigate("/")} className='NotFound-Button'>home <i className="far fa-hand-point-right"></i></button>
         </div>
       </div>
     </div>

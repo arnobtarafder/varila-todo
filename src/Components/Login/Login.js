@@ -3,35 +3,47 @@ import {
   useSignInWithEmailAndPassword,
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import Loading from "../Loading/Loading";
 import auth from "../../firebase.init";
+import useToken from "../../Hooks/useToken";
+import { FcGoogle } from "react-icons/fc";
+
 
 
 const Login = () => {
   let navigate = useNavigate();
   let location = useLocation();
+
+  const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
+  const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
+  const [token] = useToken(user || googleUser);
+
   let from = location.state?.from?.pathname || "/";
-  const [signInWithEmailAndPassword, user, loading, error] =
-    useSignInWithEmailAndPassword(auth);
-  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+
   useEffect(() => {
-    if (user || gUser) {
+    if (token) {
       toast.success("Successfully Logged In");
       navigate(from, { replace: true });
+      <Navigate to="/" />;
     }
-  }, [user, navigate, from, gUser]);
+  }, [token, googleUser, user, from, navigate]);
 
-  if (loading || gLoading) {
+
+  if (loading || googleLoading) {
     return <Loading />;
   }
+
+
   const handleSignIn = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
     signInWithEmailAndPassword(email, password);
   };
+
+
   return (
     <form onSubmit={handleSignIn} className="hero mt-16 bg-base-100">
       <div className="hero-content flex-col lg:flex-row-reverse px-0">
@@ -69,23 +81,24 @@ const Login = () => {
               <p className="text-red-500">{error?.message}</p>
             </div>
             <div className="form-control mt-2">
-              <button className="btn btn-success text-white">Login</button>
+              <button className="btn btn-primary text-white">Login</button>
             </div>
             <div className="divider">OR</div>
             <div className="form-control mt-2">
               <button
                 onClick={() => signInWithGoogle()}
-                className="btn btn-outline btn-success hover:text-white"
+                className="btn btn-outline btn-primary hover:text-white"
               >
                 Login with Google
               </button>
             </div>
-            <p className="text-red-500">{gError?.message}</p>
+            <p className="text-red-500">{googleError?.message}</p>
           </div>
         </div>
       </div>
     </form>
   );
 };
+
 
 export default Login;
